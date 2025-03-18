@@ -9,13 +9,16 @@ contract DeployLocal is Script {
     function run() external {
         vm.startBroadcast();
 
-        // Deploy ChessToken
-        ChessToken token = new ChessToken();
-        console.log("✅ ChessToken deployed at:", address(token));
+        address deployer = tx.origin; 
+        // or msg.sender, depending on your usage
+        
+        // Deploy ChessToken, owned by `deployer`
+        ChessToken token = new ChessToken(deployer);
+        console.log("ChessToken deployed at:", address(token));
 
-        // Deploy ChessGameFactory
+        // Deploy factory, pass the token address
         ChessGameFactory factory = new ChessGameFactory(address(token));
-        console.log("✅ ChessGameFactory deployed at:", address(factory));
+        console.log("ChessGameFactory deployed at:", address(factory));
 
         vm.stopBroadcast();
     }

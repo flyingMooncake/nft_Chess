@@ -1,0 +1,58 @@
+@startuml
+
+' 1 Contract Structure (Class Diagram)
+class ChessToken {
+  + mint(to: address, amount: uint256)
+  + transfer(from: address, to: address, amount: uint256)
+}
+
+class ChessGameFactory {
+  + createGame(betAmount: uint256): address
+  + feePercentage(): uint256
+}
+
+class ChessGame {
+  + joinGame()
+  + makeMove(move: string)
+  + endGame(winner: address)
+  + checkTimeout()
+}
+
+ChessGameFactory --|> ChessGame
+ChessGameFactory --> ChessToken
+ChessGame --> ChessToken
+
+@enduml
+
+
+@startuml
+
+' 2 Game Flow (Sequence Diagram)
+participant Player1
+participant ChessGameFactory
+participant ChessGame
+participant Player2
+
+Player1 -> ChessGameFactory: createGame(betAmount)
+ChessGameFactory -> ChessGame: Deploy new ChessGame Contract
+Player2 -> ChessGame: joinGame()
+Player1 -> ChessGame: makeMove("e2e4")
+Player2 -> ChessGame: makeMove("e7e5")
+...
+ChessGame -> ChessGame: checkmate detected
+ChessGame -> Player1: emit GameOver event
+
+@enduml
+
+
+@startuml
+
+' 3 Factory Deployment & Interaction (Component Diagram)
+node "Ethereum Network" {
+  [ChessGameFactory] --> [ChessGame]
+  [ChessGame] --> [ChessToken]
+  [Player1] --> [ChessGameFactory]: createGame()
+  [Player2] --> [ChessGame]: joinGame()
+}
+
+@enduml

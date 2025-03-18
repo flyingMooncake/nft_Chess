@@ -1,0 +1,15 @@
+@startuml
+actor Player1
+actor Player2
+participant ChessGameFactory
+participant ChessGame
+
+Player1 -> ChessGameFactory: createGame(betAmount)
+ChessGameFactory -> ChessGame: Deploy new ChessGame Contract
+Player2 -> ChessGame: joinGame()
+Player1 -> ChessGame: makeMove("e2e4")
+Player2 -> ChessGame: makeMove("e7e5")
+... Several Moves Later ...
+ChessGame -> ChessGame: Checkmate detected
+ChessGame -> Player1: emit GameOver event
+@enduml
