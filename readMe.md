@@ -123,7 +123,7 @@ python main.py joinGame 856f8bad315ef4df0eb46a12bfefb9b92be8079fb660dfa51cf55b0d
 
 ## Contributing
 
-Contributions are welcome! I, **Bogdan Togoé**, am a contributor to this project. Feel free to fork the repository, make changes, and submit pull requests.
+ I : **Bogdan Togoé**. Network3.0 team. 
 
 ## License
 
@@ -139,3 +139,4 @@ This project is licensed under the GNU General Public License.
 - **Front-end**: The front-end application is not yet avalible. Will be a follow up.
 
 Happy exploring. 
+
